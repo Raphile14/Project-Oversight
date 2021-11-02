@@ -70,9 +70,13 @@ namespace com.codingcatharsis.game
                 {
                     GameObject obj = new GameObject("x: " + x + " z: " + z);
                     obj.transform.SetParent(roomContainer.transform);
+
+                    // Add and Set RoomData component
+                    obj.AddComponent<RoomData>();                    
+                    obj.GetComponent<RoomData>().SetData(x, z, roomPrefabs);
+
                     rooms[x, z] = obj;
                     rooms[x, z].transform.localPosition = new Vector3(x * Game.ROOM_WIDTH, 0, z * Game.ROOM_HEIGHT);
-                    Instantiate(roomPrefabs[Random.Range(0, roomPrefabs.Length)], obj.transform);
                 }
             }
         }
