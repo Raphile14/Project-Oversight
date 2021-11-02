@@ -23,6 +23,14 @@ namespace com.codingcatharsis.game
         public static int currentHealth;
         public static float currentStamina;
 
+        // Map Dimensions
+        public static int MAP_WIDTH = 5;
+        public static int MAP_HEIGHT = 5;
+
+        // Room Dimensions
+        public static int ROOM_WIDTH = 40;
+        public static int ROOM_HEIGHT = 40;
+
         public static void SetDefaults()
         {
             currentHealth = DEFAULT_PLAYER_HEALTH;
