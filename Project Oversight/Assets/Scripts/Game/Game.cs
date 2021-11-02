@@ -24,7 +24,7 @@ namespace com.codingcatharsis.game
         public static float currentStamina;
 
         // Map Dimensions
-        public static int MAP_WIDTH = 5;
+        public static int MAP_WIDTH = 7;
         public static int MAP_HEIGHT = 5;
 
         // Room Dimensions

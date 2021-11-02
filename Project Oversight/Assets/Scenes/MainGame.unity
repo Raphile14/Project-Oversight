@@ -184,6 +184,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &717075113
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 717075114}
+  m_Layer: 0
+  m_Name: '[Boundaries]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &717075114
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 717075113}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 798901785}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &798901784
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,6 +242,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 309044135}
+  - {fileID: 717075114}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -398,6 +429,8 @@ MonoBehaviour:
   - {fileID: 6716972888685419628, guid: 8d3380b5e311b4d4a85ef49586873e64, type: 3}
   - {fileID: 8255283087441689321, guid: 1c52bab808bc0374890a6e4f1ee8f123, type: 3}
   - {fileID: 3517127192026149644, guid: 0d8c06eeedb328a498e59ba791cc6b9b, type: 3}
+  boundaryWallPrefab: {fileID: 3853646635326585272, guid: 61aaf0a3b511c064da7ef92224d0a4ff, type: 3}
+  boundaryWallContainer: {fileID: 717075113}
   roomContainer: {fileID: 309044134}
   entityContainer: {fileID: 640650837}
   enemyContainer: {fileID: 1457742862}
