@@ -68,8 +68,11 @@ namespace com.codingcatharsis.game
             {
                 for (int x = 0; x < Game.MAP_WIDTH; x++)
                 {
-                    rooms[x, z] = Instantiate(roomPrefabs[Random.Range(0, roomPrefabs.Length)], roomContainer.transform);
+                    GameObject obj = new GameObject("x: " + x + " z: " + z);
+                    obj.transform.SetParent(roomContainer.transform);
+                    rooms[x, z] = obj;
                     rooms[x, z].transform.localPosition = new Vector3(x * Game.ROOM_WIDTH, 0, z * Game.ROOM_HEIGHT);
+                    Instantiate(roomPrefabs[Random.Range(0, roomPrefabs.Length)], obj.transform);
                 }
             }
         }
