@@ -29,10 +29,10 @@ namespace com.codingcatharsis.game
             roomPrefabs = prefabs;
             // Debug.Log("x: " + xCoord + " | z: " + zCoord);
 
-            for (int i = 0; i < prefabs.Length; i++)
+            for (int i = 0; i < roomPrefabs.Length; i++)
             {
-                roomsAvailable.Add(prefabs[i]);
-            }            
+                roomsAvailable.Add(roomPrefabs[i]);
+            }
         }
 
         public void SpawnRoom()
