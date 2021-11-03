@@ -59,13 +59,24 @@ namespace com.codingcatharsis.game
         {
             while (!isRoomValid)
             {
-                // if (!isRoomValid) Spawner();
                 yield return new WaitForSeconds(Game.ROOM_SPAWN_WAIT);
 
                 bool collisionDetected = false;
                 // Debug.Log(spawnCheckers.Length);
 
+                // Check Spawner Collision
                 foreach (Transform child in currentRoom.transform.Find("[Spawners]"))
+                {
+                    if (child.gameObject.GetComponent<SpawnChecker>().getIsColliding())
+                    {
+                        // Debug.Log("Detected Collision");
+                        collisionDetected = true;
+                        break;
+                    }
+                }
+
+                // Check Wall Collision
+                foreach (Transform child in currentRoom.transform.Find("[Walls]"))
                 {
                     if (child.gameObject.GetComponent<SpawnChecker>().getIsColliding())
                     {
@@ -77,7 +88,6 @@ namespace com.codingcatharsis.game
 
                 if (!collisionDetected)
                 {
-                    // Debug.Log("Breaking");
                     Debug.Log("Finished Room: " + index);
                     Debug.Log(roomsAvailable.Count);
                     isRoomValid = true;

@@ -28,8 +28,7 @@ namespace com.codingcatharsis.game
         {
             SpawnBoundaryWalls();
             SpawnRooms();
-            SpawnRoomsWithPrefab();
-            // DeactivateBoundaryWalls();
+            SpawnRoomsWithPrefab();            
             SpawnPlayer();
         }
 
@@ -91,7 +90,11 @@ namespace com.codingcatharsis.game
             {
                 rooms[currentRoom].GetComponent<RoomData>().SpawnRoom();
                 currentRoom += 1;
-            }            
+            }
+            else
+            {
+                DeactivateBoundaryWalls();
+            }
         }
 
         void SpawnPlayer()
