@@ -10,9 +10,10 @@ namespace com.codingcatharsis.room
         private bool isColliding = false;
         private void OnTriggerEnter(Collider other)
         {
-            if (other.tag == "Boundary Wall")
+            if ((gameObject.tag == "Checker" && other.tag == "Boundary Wall") 
+                && (gameObject.tag == "Wall" && other.tag == "Checker"))
             {
-                Debug.Log(other.tag);
+                // Debug.Log(other.tag);
                 isColliding = true;
                 // gameObject.GetComponentInParent<RoomData>().SpawnRoom();
                 // this.gameObject.SetActive(false);

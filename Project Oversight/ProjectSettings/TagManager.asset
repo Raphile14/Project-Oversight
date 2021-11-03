@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Boundary Wall
   - Checker
+  - Wall
   layers:
   - Default
   - TransparentFX
