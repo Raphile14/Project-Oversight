@@ -16,16 +16,20 @@ namespace com.codingcatharsis.game
 
         // Instantiated Objects
         GameObject player;
-        GameObject[,] rooms;
+        GameObject[] rooms;
 
-        // Temp GameObjects
+        // Barrier GameObjects
         GameObject northBWall, southBWall, westBWall, eastBWall;
+
+        // Spawning Stats
+        int currentRoom = 0;
 
         void Start()
         {
             SpawnBoundaryWalls();
             SpawnRooms();
-            DeactivateBoundaryWalls();
+            SpawnRoomsWithPrefab();
+            // DeactivateBoundaryWalls();
             SpawnPlayer();
         }
 
@@ -62,9 +66,8 @@ namespace com.codingcatharsis.game
 
         void SpawnRooms()
         {
-            rooms = new GameObject[Game.MAP_WIDTH, Game.MAP_HEIGHT];
-
-            for (int z = 0; z < Game.MAP_HEIGHT; z++)
+            rooms = new GameObject[Game.MAP_WIDTH * Game.MAP_HEIGHT];
+            for (int i = 0, z = 0; z < Game.MAP_HEIGHT; z++)
             {
                 for (int x = 0; x < Game.MAP_WIDTH; x++)
                 {
@@ -73,12 +76,22 @@ namespace com.codingcatharsis.game
 
                     // Add and Set RoomData component
                     obj.AddComponent<RoomData>();                    
-                    obj.GetComponent<RoomData>().SetData(x, z, roomPrefabs);
+                    obj.GetComponent<RoomData>().SetData(i, x, z, roomPrefabs);
 
-                    rooms[x, z] = obj;
-                    rooms[x, z].transform.localPosition = new Vector3(x * Game.ROOM_WIDTH, 0, z * Game.ROOM_HEIGHT);
+                    rooms[i] = obj;
+                    rooms[i].transform.localPosition = new Vector3(x * Game.ROOM_WIDTH, 0, z * Game.ROOM_HEIGHT);
+                    i += 1;
                 }
             }
+        }
+
+        public void SpawnRoomsWithPrefab()
+        {
+            if (currentRoom < rooms.Length)
+            {
+                rooms[currentRoom].GetComponent<RoomData>().SpawnRoom();
+                currentRoom += 1;
+            }            
         }
 
         void SpawnPlayer()

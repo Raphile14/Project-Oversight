@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 202352443}
   m_Layer: 0
-  m_Name: Three
+  m_Name: '[Three]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,7 +167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 423592431}
   m_Layer: 0
-  m_Name: Four
+  m_Name: '[Four]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -203,7 +203,7 @@ GameObject:
   m_Component:
   - component: {fileID: 640498432}
   m_Layer: 0
-  m_Name: Two Apart
+  m_Name: '[Two Apart]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -338,7 +338,7 @@ GameObject:
   m_Component:
   - component: {fileID: 793459458}
   m_Layer: 0
-  m_Name: Two Adj
+  m_Name: '[Two Adj]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
