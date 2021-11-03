@@ -1,6 +1,7 @@
 using com.codingcatharsis.room;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 namespace com.codingcatharsis.game
@@ -14,11 +15,22 @@ namespace com.codingcatharsis.game
         private SpawnChecker[] spawnCheckers;
         private IEnumerator coroutine;
         private bool isRoomValid = false;
+        private NavMeshSurface surface;
 
         // Start is called before the first frame update
         void Start()
         {
 
+        }
+
+        public int getxCoord()
+        {
+            return xCoord;
+        }
+
+        public int getzCoord()
+        {
+            return zCoord;
         }
 
         public void SetData(int idx, int x, int z, GameObject[] prefabs)
@@ -37,6 +49,8 @@ namespace com.codingcatharsis.game
 
         public void SpawnRoom()
         {
+            GameObject tempFloor = gameObject.transform.Find("temp floor").gameObject;
+            Destroy(tempFloor);
             Spawner();
             coroutine = CheckCollision();
             StartCoroutine(coroutine);
@@ -49,7 +63,7 @@ namespace com.codingcatharsis.game
             // Debug.Log("Spawning");
             // Choose an available room
             int room = Random.Range(0, roomsAvailable.Count);
-            currentRoom = Instantiate(roomPrefabs[room], this.transform);
+            currentRoom = Instantiate((GameObject) roomsAvailable[room], this.transform);
             roomsAvailable.RemoveAt(room);
 
             spawnCheckers = GetComponentsInChildren<SpawnChecker>();            
@@ -88,23 +102,28 @@ namespace com.codingcatharsis.game
 
                 if (!collisionDetected)
                 {
-                    Debug.Log("Finished Room: " + index);
-                    Debug.Log(roomsAvailable.Count);
-                    isRoomValid = true;
+                    // Check if room is navigationally valid
+                    surface = gameObject.GetComponentInChildren<NavMeshSurface>();
+                    surface.BuildNavMesh();
 
-                    // Spawn next room
                     GameObject control = GameObject.Find("[Game Controller]");
-                    control.GetComponent<Controller>().SpawnRoomsWithPrefab();
-                    yield break;
+                    isRoomValid = control.GetComponent<Controller>().CheckPath();
+
+                    if (isRoomValid)
+                    {
+                        Debug.Log("Finished Room: " + index);
+                        // Debug.Log(roomsAvailable.Count);
+
+                        // Spawn next room
+                        control.GetComponent<Controller>().SpawnRoomsWithPrefab();
+                        yield break;
+                    }
                 }
 
-                else
-                {
-                    Destroy(currentRoom);
-                    // Debug.Log("Respawning");
-                    Spawner();
-                    yield return null;
-                }
+                Destroy(currentRoom);
+                // Debug.Log("Respawning");
+                Spawner();
+                yield return null;
             }            
         }
     }

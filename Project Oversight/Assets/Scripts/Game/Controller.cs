@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace com.codingcatharsis.game
 {
     public class Controller : MonoBehaviour
     {
         public GameObject playerPrefab;
+        public GameObject floorPrefab;
         public GameObject[] roomPrefabs;
         public GameObject boundaryWallPrefab;
         public GameObject boundaryWallContainer;
@@ -29,7 +32,6 @@ namespace com.codingcatharsis.game
             SpawnBoundaryWalls();
             SpawnRooms();
             SpawnRoomsWithPrefab();            
-            SpawnPlayer();
         }
 
         void SpawnBoundaryWalls()
@@ -73,6 +75,9 @@ namespace com.codingcatharsis.game
                     GameObject obj = new GameObject("x: " + x + " z: " + z);
                     obj.transform.SetParent(roomContainer.transform);
 
+                    GameObject tempFloor = Instantiate(floorPrefab, obj.transform);
+                    tempFloor.name = "temp floor";
+
                     // Add and Set RoomData component
                     obj.AddComponent<RoomData>();                    
                     obj.GetComponent<RoomData>().SetData(i, x, z, roomPrefabs);
@@ -81,7 +86,31 @@ namespace com.codingcatharsis.game
                     rooms[i].transform.localPosition = new Vector3(x * Game.ROOM_WIDTH, 0, z * Game.ROOM_HEIGHT);
                     i += 1;
                 }
+            }            
+        }
+
+        public bool CheckPath()
+        {
+            Vector3 starting = new Vector3(0, 1, 0);
+            // Debug.Log("Checking Path");
+            for (int i = 1; i < rooms.Length; i++)
+            {
+                bool status = false;
+                NavMeshPath path = new NavMeshPath();
+                Vector3 target = new Vector3(rooms[i].GetComponent<RoomData>().getxCoord() * Game.ROOM_WIDTH, 1, rooms[i].GetComponent<RoomData>().getzCoord() * Game.ROOM_HEIGHT);
+
+                NavMesh.CalculatePath(starting, target, NavMesh.AllAreas, path);
+                if (path.status == NavMeshPathStatus.PathComplete)
+                {
+                    status = true;
+                }
+                // Debug.Log("i: " + i + " status: " + status);
+                if (!status)
+                {
+                    return false;
+                }                
             }
+            return true;
         }
 
         public void SpawnRoomsWithPrefab()
@@ -94,12 +123,24 @@ namespace com.codingcatharsis.game
             else
             {
                 DeactivateBoundaryWalls();
+                DeleteAllCheckers();
+                SpawnPlayer();
             }
         }
 
         void SpawnPlayer()
         {
             player = Instantiate(playerPrefab, entityContainer.transform);
+        }
+
+        void DeleteAllCheckers()
+        {
+            GameObject[] checkers = GameObject.FindGameObjectsWithTag("Checker");
+
+            foreach(GameObject checker in checkers)
+            {
+                Destroy(checker);
+            }
         }
     }
 }

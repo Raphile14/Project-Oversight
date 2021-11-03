@@ -413,6 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 2757080499197062592, guid: e4e54b0ae15bfc941bfcef619ffed4b6, type: 3}
+  floorPrefab: {fileID: 8748807172745834293, guid: 4ca655a890d73ea4ba26086e0df520a4, type: 3}
   roomPrefabs:
   - {fileID: 6186385340142761274, guid: a9599a81bf9016a45b8dca8170bca562, type: 3}
   - {fileID: 469446142581672590, guid: b2b18cf19b6b08246a0acd22a6e2a3ba, type: 3}
