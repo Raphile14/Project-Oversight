@@ -122,9 +122,20 @@ namespace com.codingcatharsis.game
             }
             else
             {
+                TurnOffWallTrigger();
                 DeactivateBoundaryWalls();
                 DeleteAllCheckers();                
                 SpawnPlayer();
+            }
+        }
+
+        void TurnOffWallTrigger()
+        {
+            GameObject[] walls = GameObject.FindGameObjectsWithTag("Wall");
+
+            foreach(GameObject wall in walls)
+            {
+                wall.GetComponent<BoxCollider>().isTrigger = false;
             }
         }
 
