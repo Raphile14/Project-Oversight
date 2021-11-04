@@ -8,6 +8,7 @@ TagManager:
   - Checker
   - Wall
   - Floor
+  - Roof
   layers:
   - Default
   - TransparentFX

@@ -10,12 +10,14 @@ namespace com.codingcatharsis.game
     {
         public GameObject playerPrefab;
         public GameObject floorPrefab;
+        public GameObject roofPrefab;
         public GameObject[] roomPrefabs;
         public GameObject boundaryWallPrefab;
         public GameObject boundaryWallContainer;
         public GameObject roomContainer;
         public GameObject entityContainer;        
         public GameObject enemyContainer;
+        public GameObject testCube;
 
         // Instantiated Objects
         GameObject player;
@@ -92,19 +94,19 @@ namespace com.codingcatharsis.game
         public bool CheckPath()
         {
             Vector3 starting = new Vector3(0, 1, 0);
-            // Debug.Log("Checking Path");
-            for (int i = 1; i < rooms.Length; i++)
+            Debug.Log("Checking Path");
+            for (int i = 0; i < rooms.Length; i++)
             {
                 bool status = false;
                 NavMeshPath path = new NavMeshPath();
                 Vector3 target = new Vector3(rooms[i].GetComponent<RoomData>().getxCoord() * Game.ROOM_WIDTH, 1, rooms[i].GetComponent<RoomData>().getzCoord() * Game.ROOM_HEIGHT);
-
+                testCube.transform.localPosition = target;
                 NavMesh.CalculatePath(starting, target, NavMesh.AllAreas, path);
                 if (path.status == NavMeshPathStatus.PathComplete)
                 {
                     status = true;
                 }
-                // Debug.Log("i: " + i + " status: " + status);
+                Debug.Log("i: " + i + " status: " + status);
                 if (!status)
                 {
                     return false;
@@ -124,7 +126,8 @@ namespace com.codingcatharsis.game
             {
                 TurnOffWallTrigger();
                 DeactivateBoundaryWalls();
-                DeleteAllCheckers();                
+                DeleteAllCheckers();
+                SpawnRoofs();
                 SpawnPlayer();
             }
         }
@@ -139,9 +142,21 @@ namespace com.codingcatharsis.game
             }
         }
 
+        void SpawnRoofs()
+        {
+            Debug.Log("Spawned Roofs");
+            for (int i = 0; i < rooms.Length; i++)
+            {
+                GameObject roof = Instantiate(roofPrefab, rooms[i].transform);
+                roof.transform.localPosition = new Vector3(0, 5.5f, 0);
+                roof.transform.localScale = new Vector3(4, 1, 4);
+            }
+        }
+
         void SpawnPlayer()
         {
             player = Instantiate(playerPrefab, entityContainer.transform);
+            player.transform.localPosition = new Vector3(0, 1, 0);
         }
 
         void DeleteAllCheckers()
