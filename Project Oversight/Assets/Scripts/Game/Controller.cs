@@ -19,6 +19,8 @@ namespace com.codingcatharsis.game
         public GameObject enemyContainer;
         public GameObject testCube;
 
+        private NavMeshAgent pathChecker;
+
         // Instantiated Objects
         GameObject player;
         GameObject[] rooms;
@@ -31,6 +33,7 @@ namespace com.codingcatharsis.game
 
         void Start()
         {
+            pathChecker = testCube.GetComponent<NavMeshAgent>();
             SpawnBoundaryWalls();
             SpawnRooms();
             SpawnRoomsWithPrefab();            
@@ -93,36 +96,61 @@ namespace com.codingcatharsis.game
 
         public bool CheckPath()
         {
-            return true;
-            //Vector3 starting = new Vector3((Game.MAP_WIDTH / 2) * Game.ROOM_WIDTH, 1, (Game.MAP_HEIGHT / 2) * Game.ROOM_HEIGHT);
+            if (currentRoom == rooms.Length) return true;
+            // Vector3 starting = new Vector3((Game.MAP_WIDTH / 2) * Game.ROOM_WIDTH, 1, (Game.MAP_HEIGHT / 2) * Game.ROOM_HEIGHT);
             Vector3 starting = new Vector3(0, 1, 0);
-            testCube.transform.localPosition = starting;
+            if (currentRoom > 0)
+            {
+                Vector3 newStart = new Vector3(rooms[currentRoom - 1].GetComponent<RoomData>().getxCoord() * Game.ROOM_WIDTH, 1, rooms[currentRoom - 1].GetComponent<RoomData>().getzCoord() * Game.ROOM_HEIGHT);
+                Debug.Log(newStart);
+                starting = newStart;
+            }
+            testCube.transform.position = starting;
             Debug.Log("Checking Path");
             //int completePaths = 0;
-            for (int i = 0; i < rooms.Length; i++)
+            //for (int i = 0; i < rooms.Length; i++)
+            //{
+            //    if (currentRoom == i) continue;
+            //    bool status = false;
+            //    NavMeshPath path = new NavMeshPath();
+            //    Vector3 target = new Vector3(rooms[i].GetComponent<RoomData>().getxCoord() * Game.ROOM_WIDTH, 1, rooms[i].GetComponent<RoomData>().getzCoord() * Game.ROOM_HEIGHT);
+            //    //NavMesh.CalculatePath(starting, target, NavMesh.AllAreas, path);
+            //    pathChecker.CalculatePath(target, path);
+            //    if (path.status == NavMeshPathStatus.PathComplete) // 
+            //    {
+            //        status = true;
+            //        //completePaths += 1;
+            //    }
+            //    //else if (path.status == NavMeshPathStatus.PathPartial)
+            //    //{
+            //    //    int maxTries = Game.MAP_WIDTH * Game.MAP_HEIGHT;
+            //    //    Debug.Log("last path length: " + path.corners.Length);
+            //    //    Debug.Log("last path: " + path.corners[path.corners.Length - 1]);
+            //    //    Time.timeScale = 0;
+            //    //}
+            //    Debug.Log("Path Status: " + path.status);
+            //    Debug.Log("i: " + i + " status: " + status);
+            //    if (!status)
+            //    {
+            //        return false;
+            //    }
+            //}
+            bool status = false;
+            NavMeshPath path = new NavMeshPath();
+            Debug.Log("Current Room: " + currentRoom);
+            Vector3 target = new Vector3(rooms[currentRoom].GetComponent<RoomData>().getxCoord() * Game.ROOM_WIDTH, 1, rooms[currentRoom].GetComponent<RoomData>().getzCoord() * Game.ROOM_HEIGHT);
+            Debug.Log("Current Target: " + target);
+            //NavMesh.CalculatePath(starting, target, NavMesh.AllAreas, path);
+            pathChecker.CalculatePath(target, path);
+            if (path.status == NavMeshPathStatus.PathComplete)
             {
-                if (currentRoom == i) continue;
-                bool status = false;
-                NavMeshPath path = new NavMeshPath();
-                Vector3 target = new Vector3(rooms[i].GetComponent<RoomData>().getxCoord() * Game.ROOM_WIDTH, 1, rooms[i].GetComponent<RoomData>().getzCoord() * Game.ROOM_HEIGHT);                
-                NavMesh.CalculatePath(starting, target, NavMesh.AllAreas, path);
-                if (path.status == NavMeshPathStatus.PathComplete || path.status == NavMeshPathStatus.PathPartial) // 
-                {
-                    status = true;
-                    //completePaths += 1;
-                }
-                //else if (path.status == NavMeshPathStatus.PathPartial)
-                //{
-                //    int maxTries = Game.MAP_WIDTH * Game.MAP_HEIGHT;
-                //    Debug.Log("last path length: " + path.corners.Length);
-                //    Debug.Log("last path: " + path.corners[path.corners.Length - 1]);
-                //    Time.timeScale = 0;
-                //}
-                Debug.Log("i: " + i + " status: " + status);
-                if (!status)
-                {
-                    return false;
-                }
+                status = true;
+            }
+            Debug.Log("Path Status: " + path.status);
+            Debug.Log("i: " + currentRoom + " status: " + status);
+            if (!status)
+            {
+                return false;
             }
             //if (completePaths < 3)
             //{
@@ -144,8 +172,14 @@ namespace com.codingcatharsis.game
                 DeactivateBoundaryWalls();
                 DeleteAllCheckers();
                 SpawnRoofs();
+                DeactivateTestAgent();
                 SpawnPlayer();
             }
+        }
+
+        void DeactivateTestAgent()
+        {
+            testCube.SetActive(false);
         }
 
         void TurnOffWallTrigger()
