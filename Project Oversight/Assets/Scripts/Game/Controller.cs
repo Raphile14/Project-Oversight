@@ -123,7 +123,7 @@ namespace com.codingcatharsis.game
             else
             {
                 DeactivateBoundaryWalls();
-                DeleteAllCheckers();
+                DeleteAllCheckers();                
                 SpawnPlayer();
             }
         }

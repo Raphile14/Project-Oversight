@@ -10,19 +10,22 @@ namespace com.codingcatharsis.player
         Vector3 moveDirection;
         float horizontalMovement;
         float verticalMovement;
+        bool isRunning = false;
 
         Rigidbody rb;
 
         private void Start()
         {
+            Game.SetDefaults();
             rb = GetComponent<Rigidbody>();
-            rb.freezeRotation = true;
+            rb.freezeRotation = true;            
         }
 
         private void Update()
         {
             GetInput();
             ControlDrag();
+            Debug.Log("Health: " + Game.currentHealth + " Stamina: " + Game.currentStamina);
         }
 
         void GetInput()
@@ -31,6 +34,23 @@ namespace com.codingcatharsis.player
             verticalMovement = Input.GetAxisRaw("Vertical");
 
             moveDirection = transform.forward * verticalMovement + transform.right * horizontalMovement;
+
+            // Check if Sprinting
+            if (Input.GetKey(KeyCode.LeftShift) && (horizontalMovement != 0 || verticalMovement != 0) && Game.currentStamina > 0)
+            {
+                isRunning = true;
+                Game.currentStamina -= Game.STAMINA_CONSUMPTION * Time.deltaTime;
+            }
+            else
+            {
+                isRunning = false;
+            }
+
+            // Regen Stamina if not sprinting
+            if (!Input.GetKey(KeyCode.LeftShift) && Game.currentStamina < Game.DEFAULT_MAX_STAMINA)
+            {
+                Game.currentStamina += Game.STAMINA_REGENERATION * Time.deltaTime;
+            }
         }
 
         void ControlDrag()
@@ -40,7 +60,14 @@ namespace com.codingcatharsis.player
 
         private void FixedUpdate()
         {
-            rb.AddForce(moveDirection.normalized * Game.DEFAULT_PLAYER_SPEED, ForceMode.Acceleration);
+            float speed = Game.DEFAULT_PLAYER_SPEED;
+
+            if (isRunning)
+            {
+                speed = Game.DEFAULT_PLAYER_SPRINTSPEED;
+            }
+
+            rb.AddForce(moveDirection.normalized * speed, ForceMode.Acceleration);
         }
     }
 

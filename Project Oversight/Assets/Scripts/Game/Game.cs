@@ -7,17 +7,18 @@ namespace com.codingcatharsis.game
     public class Game : MonoBehaviour
     {
         // Player Default Stats
-        public static float DEFAULT_PLAYER_SPEED = 100.0f;
+        public static float DEFAULT_PLAYER_SPEED = 30.0f;
+        public static float DEFAULT_PLAYER_SPRINTSPEED = 80.0f;
         public static int DEFAULT_PLAYER_HEALTH = 10;
         public static float DEFAULT_DRAG = 6f;
         // TODO: Save sensitivity
-        public static float DEFAULT_SENSX = 10f;
-        public static float DEFAULT_SENSY = 10f;
+        public static float DEFAULT_SENSX = 15f;
+        public static float DEFAULT_SENSY = 15f;
 
         // Player Stamina
         public static float DEFAULT_MAX_STAMINA = 100f;
-        public static float STAMINA_CONSUMPTION = 5f;
-        public static float STAMINA_REGENERATION = 10f;
+        public static float STAMINA_CONSUMPTION = 10f;
+        public static float STAMINA_REGENERATION = 15f;
 
         // Player Current Stats
         public static int currentHealth;
