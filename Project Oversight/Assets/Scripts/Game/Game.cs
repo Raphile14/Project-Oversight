@@ -31,7 +31,7 @@ namespace com.codingcatharsis.game
         // Room Dimensions
         public static int ROOM_WIDTH = 40;
         public static int ROOM_HEIGHT = 40;
-        public static float ROOM_SPAWN_WAIT = 0.25f;
+        public static float ROOM_SPAWN_WAIT = 0.1f;
 
         public static void SetDefaults()
         {

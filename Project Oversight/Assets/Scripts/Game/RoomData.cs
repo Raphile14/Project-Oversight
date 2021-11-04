@@ -41,7 +41,6 @@ namespace com.codingcatharsis.game
             roomPrefabs = prefabs;
             // Debug.Log("x: " + xCoord + " | z: " + zCoord);            
             RefillAvailableRooms();
-            Debug.Log("ArrayList Count: " + roomsAvailable.Count);
         }
 
         void RefillAvailableRooms()
@@ -67,9 +66,9 @@ namespace com.codingcatharsis.game
             // Debug.Log(roomsAvailable.Count);
             // Debug.Log("Spawning");
             // Choose an available room
-            Debug.Log("Count: " + roomsAvailable.Count);
+            // Debug.Log("Count: " + roomsAvailable.Count);
             int room = Random.Range(0, roomsAvailable.Count);
-            Debug.Log("Room: " + room);
+            // Debug.Log("Room: " + room);
             currentRoom = Instantiate((GameObject) roomsAvailable[room], this.transform);
             roomsAvailable.RemoveAt(room);
 
