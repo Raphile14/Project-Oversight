@@ -93,6 +93,7 @@ namespace com.codingcatharsis.game
 
         public bool CheckPath()
         {
+            return true;
             //Vector3 starting = new Vector3((Game.MAP_WIDTH / 2) * Game.ROOM_WIDTH, 1, (Game.MAP_HEIGHT / 2) * Game.ROOM_HEIGHT);
             Vector3 starting = new Vector3(0, 1, 0);
             testCube.transform.localPosition = starting;
