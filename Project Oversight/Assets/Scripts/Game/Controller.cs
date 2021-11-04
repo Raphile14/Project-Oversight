@@ -93,10 +93,11 @@ namespace com.codingcatharsis.game
 
         public bool CheckPath()
         {
-            Vector3 starting = new Vector3((Game.MAP_WIDTH / 2) * Game.ROOM_WIDTH, 1, (Game.MAP_HEIGHT / 2) * Game.ROOM_HEIGHT);
+            //Vector3 starting = new Vector3((Game.MAP_WIDTH / 2) * Game.ROOM_WIDTH, 1, (Game.MAP_HEIGHT / 2) * Game.ROOM_HEIGHT);
+            Vector3 starting = new Vector3(0, 1, 0);
             testCube.transform.localPosition = starting;
             Debug.Log("Checking Path");
-            int completePaths = 0;
+            //int completePaths = 0;
             for (int i = 0; i < rooms.Length; i++)
             {
                 if (currentRoom == i) continue;
@@ -104,10 +105,10 @@ namespace com.codingcatharsis.game
                 NavMeshPath path = new NavMeshPath();
                 Vector3 target = new Vector3(rooms[i].GetComponent<RoomData>().getxCoord() * Game.ROOM_WIDTH, 1, rooms[i].GetComponent<RoomData>().getzCoord() * Game.ROOM_HEIGHT);                
                 NavMesh.CalculatePath(starting, target, NavMesh.AllAreas, path);
-                if (path.status == NavMeshPathStatus.PathComplete || path.status == NavMeshPathStatus.PathPartial) //  || path.status == NavMeshPathStatus.PathPartial
+                if (path.status == NavMeshPathStatus.PathComplete || path.status == NavMeshPathStatus.PathPartial) // 
                 {
                     status = true;
-                    completePaths += 1;
+                    //completePaths += 1;
                 }
                 //else if (path.status == NavMeshPathStatus.PathPartial)
                 //{
@@ -117,15 +118,15 @@ namespace com.codingcatharsis.game
                 //    Time.timeScale = 0;
                 //}
                 Debug.Log("i: " + i + " status: " + status);
-                //if (!status)
-                //{
-                //    return false;
-                //}
+                if (!status)
+                {
+                    return false;
+                }
             }
-            if (completePaths < 3)
-            {
-                return false;
-            }
+            //if (completePaths < 3)
+            //{
+            //    return false;
+            //}
             return true;
         }
 
