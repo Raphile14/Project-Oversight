@@ -97,15 +97,17 @@ namespace com.codingcatharsis.game
         public bool CheckPath()
         {
             if (currentRoom == rooms.Length) return true;
-            // Vector3 starting = new Vector3((Game.MAP_WIDTH / 2) * Game.ROOM_WIDTH, 1, (Game.MAP_HEIGHT / 2) * Game.ROOM_HEIGHT);
-            Vector3 starting = new Vector3(0, 1, 0);
-            if (currentRoom > 0)
-            {
-                Vector3 newStart = new Vector3(rooms[currentRoom - 1].GetComponent<RoomData>().getxCoord() * Game.ROOM_WIDTH, 1, rooms[currentRoom - 1].GetComponent<RoomData>().getzCoord() * Game.ROOM_HEIGHT);
-                Debug.Log(newStart);
-                starting = newStart;
-            }
+            pathChecker.enabled = false;
+            Vector3 starting = new Vector3((Game.MAP_WIDTH / 2) * Game.ROOM_WIDTH, 1, rooms[currentRoom].GetComponent<RoomData>().getzCoord() * Game.ROOM_HEIGHT);
+            // Vector3 starting = new Vector3(0, 1, 0);
+            //if (currentRoom > 0)
+            //{
+            //    Vector3 newStart = new Vector3(rooms[currentRoom - 1].GetComponent<RoomData>().getxCoord() * Game.ROOM_WIDTH, 1, rooms[currentRoom - 1].GetComponent<RoomData>().getzCoord() * Game.ROOM_HEIGHT);
+            //    Debug.Log(newStart);
+            //    starting = newStart;
+            //}
             testCube.transform.position = starting;
+            pathChecker.enabled = true;
             Debug.Log("Checking Path");
             //int completePaths = 0;
             //for (int i = 0; i < rooms.Length; i++)
@@ -146,6 +148,7 @@ namespace com.codingcatharsis.game
             {
                 status = true;
             }
+            Debug.Log("Corners: " + path.corners.Length);
             Debug.Log("Path Status: " + path.status);
             Debug.Log("i: " + currentRoom + " status: " + status);
             if (!status)
