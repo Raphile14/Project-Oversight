@@ -221,9 +221,15 @@ namespace com.codingcatharsis.game
                 TurnOffWallTrigger();
                 // DeactivateBoundaryWalls();
                 DeleteAllCheckers();
+                BuildNavSurface();
                 SpawnRoofs();
                 SpawnPlayer();
             }
+        }
+
+        void BuildNavSurface()
+        {
+            rooms[0].GetComponent<RoomData>().BuildNavMesh();
         }
 
         void TurnOffWallTrigger()

@@ -75,6 +75,13 @@ namespace com.codingcatharsis.game
             spawnCheckers = GetComponentsInChildren<SpawnChecker>();            
         }
 
+        public void BuildNavMesh()
+        {
+            // Check if room is navigationally valid
+            surface = gameObject.GetComponentInChildren<NavMeshSurface>();
+            surface.BuildNavMesh();
+        }
+
         IEnumerator CheckCollision()
         {
             while (!isRoomValid)
@@ -107,11 +114,7 @@ namespace com.codingcatharsis.game
                 }
 
                 if (!collisionDetected)
-                {
-                    // Check if room is navigationally valid
-                    // surface = gameObject.GetComponentInChildren<NavMeshSurface>();
-                    // surface.BuildNavMesh();
-
+                {                    
                     GameObject control = GameObject.Find("[Game Controller]");
                     // isRoomValid = control.GetComponent<Controller>().CheckPath();
                     isRoomValid = true;
