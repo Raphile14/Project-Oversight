@@ -109,11 +109,12 @@ namespace com.codingcatharsis.game
                 if (!collisionDetected)
                 {
                     // Check if room is navigationally valid
-                    surface = gameObject.GetComponentInChildren<NavMeshSurface>();
-                    surface.BuildNavMesh();
+                    // surface = gameObject.GetComponentInChildren<NavMeshSurface>();
+                    // surface.BuildNavMesh();
 
                     GameObject control = GameObject.Find("[Game Controller]");
-                    isRoomValid = control.GetComponent<Controller>().CheckPath();
+                    // isRoomValid = control.GetComponent<Controller>().CheckPath();
+                    isRoomValid = true;
 
                     if (isRoomValid)
                     {
