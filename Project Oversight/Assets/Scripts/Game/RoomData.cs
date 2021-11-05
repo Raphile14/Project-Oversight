@@ -39,7 +39,6 @@ namespace com.codingcatharsis.game
             xCoord = x;
             zCoord = z;
             roomPrefabs = prefabs;
-            // Debug.Log("x: " + xCoord + " | z: " + zCoord);            
             RefillAvailableRooms();
         }
 
@@ -58,7 +57,6 @@ namespace com.codingcatharsis.game
             Spawner();
             coroutine = CheckCollision();
             StartCoroutine(coroutine);
-            // Debug.Log(roomsAvailable.Count);
         }
 
         private void Spawner()
@@ -116,18 +114,12 @@ namespace com.codingcatharsis.game
                 if (!collisionDetected)
                 {                    
                     GameObject control = GameObject.Find("[Game Controller]");
-                    // isRoomValid = control.GetComponent<Controller>().CheckPath();
-                    isRoomValid = true;
+                    Debug.Log("Finished Room: " + index);
+                    // Debug.Log(roomsAvailable.Count);
 
-                    if (isRoomValid)
-                    {
-                        Debug.Log("Finished Room: " + index);
-                        // Debug.Log(roomsAvailable.Count);
-
-                        // Spawn next room
-                        control.GetComponent<Controller>().SpawnRoomsWithPrefab();
-                        yield break;
-                    }
+                    // Spawn next room
+                    control.GetComponent<Controller>().SpawnRoomsWithPrefab();
+                    yield break;
                 }
 
                 Destroy(currentRoom);

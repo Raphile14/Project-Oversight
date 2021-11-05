@@ -133,81 +133,12 @@ namespace com.codingcatharsis.game
 
                     rooms[i] = obj;
                     Vector3 location = new Vector3((x * Game.ROOM_WIDTH) + (x * Game.HALLWAY_WIDTH), 0, (z * Game.ROOM_HEIGHT) + (z * Game.HALLWAY_WIDTH));
-                    // Vector3 location = new Vector3((x * Game.ROOM_WIDTH), 0, (z * Game.ROOM_HEIGHT));
                     rooms[i].transform.localPosition = location;
                     Debug.Log(location);
                     i += 1;
                 }
             }
-        }
-
-        //public bool CheckPath()
-        //{
-        //    if (currentRoom == rooms.Length) return true;
-        //    pathChecker.enabled = false;
-        //    Vector3 starting = new Vector3((Game.MAP_WIDTH / 2) * Game.ROOM_WIDTH, 1, rooms[currentRoom].GetComponent<RoomData>().getzCoord() * Game.ROOM_HEIGHT);
-        //    // Vector3 starting = new Vector3(0, 1, 0);
-        //    //if (currentRoom > 0)
-        //    //{
-        //    //    Vector3 newStart = new Vector3(rooms[currentRoom - 1].GetComponent<RoomData>().getxCoord() * Game.ROOM_WIDTH, 1, rooms[currentRoom - 1].GetComponent<RoomData>().getzCoord() * Game.ROOM_HEIGHT);
-        //    //    Debug.Log(newStart);
-        //    //    starting = newStart;
-        //    //}
-        //    testCube.transform.position = starting;
-        //    pathChecker.enabled = true;
-        //    Debug.Log("Checking Path");
-        //    //int completePaths = 0;
-        //    //for (int i = 0; i < rooms.Length; i++)
-        //    //{
-        //    //    if (currentRoom == i) continue;
-        //    //    bool status = false;
-        //    //    NavMeshPath path = new NavMeshPath();
-        //    //    Vector3 target = new Vector3(rooms[i].GetComponent<RoomData>().getxCoord() * Game.ROOM_WIDTH, 1, rooms[i].GetComponent<RoomData>().getzCoord() * Game.ROOM_HEIGHT);
-        //    //    //NavMesh.CalculatePath(starting, target, NavMesh.AllAreas, path);
-        //    //    pathChecker.CalculatePath(target, path);
-        //    //    if (path.status == NavMeshPathStatus.PathComplete) // 
-        //    //    {
-        //    //        status = true;
-        //    //        //completePaths += 1;
-        //    //    }
-        //    //    //else if (path.status == NavMeshPathStatus.PathPartial)
-        //    //    //{
-        //    //    //    int maxTries = Game.MAP_WIDTH * Game.MAP_HEIGHT;
-        //    //    //    Debug.Log("last path length: " + path.corners.Length);
-        //    //    //    Debug.Log("last path: " + path.corners[path.corners.Length - 1]);
-        //    //    //    Time.timeScale = 0;
-        //    //    //}
-        //    //    Debug.Log("Path Status: " + path.status);
-        //    //    Debug.Log("i: " + i + " status: " + status);
-        //    //    if (!status)
-        //    //    {
-        //    //        return false;
-        //    //    }
-        //    //}
-        //    bool status = false;
-        //    NavMeshPath path = new NavMeshPath();
-        //    Debug.Log("Current Room: " + currentRoom);
-        //    Vector3 target = new Vector3(rooms[currentRoom].GetComponent<RoomData>().getxCoord() * Game.ROOM_WIDTH, 1, rooms[currentRoom].GetComponent<RoomData>().getzCoord() * Game.ROOM_HEIGHT);
-        //    Debug.Log("Current Target: " + target);
-        //    //NavMesh.CalculatePath(starting, target, NavMesh.AllAreas, path);
-        //    pathChecker.CalculatePath(target, path);
-        //    if (path.status == NavMeshPathStatus.PathComplete)
-        //    {
-        //        status = true;
-        //    }
-        //    Debug.Log("Corners: " + path.corners.Length);
-        //    Debug.Log("Path Status: " + path.status);
-        //    Debug.Log("i: " + currentRoom + " status: " + status);
-        //    if (!status)
-        //    {
-        //        return false;
-        //    }
-        //    //if (completePaths < 3)
-        //    //{
-        //    //    return false;
-        //    //}
-        //    return true;
-        //}
+        }        
 
         public void SpawnRoomsWithPrefab()
         {
