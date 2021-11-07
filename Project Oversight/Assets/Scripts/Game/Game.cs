@@ -40,6 +40,34 @@ namespace com.codingcatharsis.game
         // Seed Data
         public static int seed = -1;
 
+        // Objectives
+        public static int TOTAL_TASKS = 10;
+
+        public static void SetDifficulty(int value)
+        {
+            switch (value)
+            {
+                // Easy
+                default:
+                    MAP_WIDTH = 3;
+                    MAP_HEIGHT = 3;
+                    TOTAL_TASKS = 10;
+                    break;
+                // Normal
+                case 1:
+                    MAP_WIDTH = 5;
+                    MAP_HEIGHT = 5;
+                    TOTAL_TASKS = 20;
+                    break;
+                // Hard
+                case 2:
+                    MAP_WIDTH = 7;
+                    MAP_HEIGHT = 7;
+                    TOTAL_TASKS = 30;
+                    break;
+            }
+            Debug.Log("Width: " + MAP_WIDTH + " | Height: " + MAP_HEIGHT);
+        }
         public static void SetSeed(int value)
         {
             seed = value;

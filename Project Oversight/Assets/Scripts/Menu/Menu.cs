@@ -14,13 +14,15 @@ namespace com.codingcatharsis.menu
         public GameObject settingsMenu;
         public GameObject playMenu;
         public TMP_InputField seedInput;
+        public TMP_Dropdown difficultyInput;
 
         public void StartGame()
         {
             if (seedInput.text.Length > 0)
             {
                 Game.SetSeed(int.Parse(seedInput.text));
-            }            
+            }
+            Game.SetDifficulty(difficultyInput.value);
             SceneManager.LoadScene("MainGame");
         }
 
