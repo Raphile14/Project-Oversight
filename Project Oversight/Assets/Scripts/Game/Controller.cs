@@ -30,6 +30,7 @@ namespace com.codingcatharsis.game
 
         void Start()
         {
+            Game.InitRandomGenerator();
             SpawnBoundaryWalls();
             SpawnRooms();
             SpawnRoomsWithPrefab();
@@ -132,7 +133,7 @@ namespace com.codingcatharsis.game
                     rooms[i] = obj;
                     Vector3 location = new Vector3((x * Game.ROOM_WIDTH) + (x * Game.HALLWAY_WIDTH), 0, (z * Game.ROOM_HEIGHT) + (z * Game.HALLWAY_WIDTH));
                     rooms[i].transform.localPosition = location;
-                    Debug.Log(location);
+                    // Debug.Log(location);
                     i += 1;
                 }
             }

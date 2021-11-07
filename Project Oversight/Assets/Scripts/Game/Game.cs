@@ -37,6 +37,28 @@ namespace com.codingcatharsis.game
         public static int HALLWAY_HEIGHT = 40;
         public static int HALLWAY_WIDTH = 20;
 
+        // Seed Data
+        public static int seed = -1;
+
+        public static void SetSeed(int value)
+        {
+            seed = value;
+        }
+
+        public static void InitRandomGenerator()
+        {
+            if (seed == -1)
+            {
+                seed = Random.Range(0, 1000000);
+                Debug.Log("Random Seed: " + seed);
+            }
+            else
+            {
+                Debug.Log("Selected Seed: " + seed);
+            }            
+            Random.InitState(seed);
+        }
+
         public static void SetDefaults()
         {
             currentHealth = DEFAULT_PLAYER_HEALTH;
