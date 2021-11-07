@@ -8,17 +8,15 @@ namespace com.codingcatharsis.game
 {
     public class Controller : MonoBehaviour
     {
-        public GameObject playerPrefab;
-        public GameObject floorPrefab;
-        public GameObject roofPrefab;
-        public GameObject hallwayFloorPrefab;
-        public GameObject hallwayContainer;
-        public GameObject[] roomPrefabs;
-        public GameObject boundaryWallPrefab;
-        public GameObject boundaryWallContainer;
-        public GameObject roomContainer;
-        public GameObject entityContainer;
-        public GameObject enemyContainer;
+        // Prefabs
+        public GameObject playerPrefab, floorPrefab, roofPrefab, hallwayFloorPrefab, boundaryWallPrefab;
+        public GameObject[] roomPrefabs, internalRoomPrefabs;
+        public GameObject spawnRoom, exitRoom;
+
+        // Containers
+        public GameObject hallwayContainer, boundaryWallContainer, roomContainer, entityContainer, enemyContainer;
+
+        // Internal Room Objects
 
         // Instantiated Objects
         GameObject player;
@@ -152,6 +150,7 @@ namespace com.codingcatharsis.game
                 TurnOffWallTrigger();
                 // DeactivateBoundaryWalls();
                 DeleteAllCheckers();
+                SpawnInternalRooms();
                 BuildNavSurface();
                 SpawnRoofs();
                 SpawnPlayer();
@@ -175,7 +174,6 @@ namespace com.codingcatharsis.game
 
         void SpawnRoofs()
         {
-            Debug.Log("Spawned Roofs");
             for (int i = 0; i < rooms.Length; i++)
             {
                 GameObject roof = Instantiate(roofPrefab, rooms[i].transform);
@@ -197,6 +195,21 @@ namespace com.codingcatharsis.game
             foreach (GameObject checker in checkers)
             {
                 Destroy(checker);
+            }
+        }
+
+        void SpawnInternalRooms()
+        {
+            for (int i = 0; i < rooms.Length; i++)
+            {
+                //GameObject roof = Instantiate(roofPrefab, rooms[i].transform);
+                //roof.transform.localPosition = new Vector3(0, 5.5f, 0);
+                //roof.transform.localScale = new Vector3(4, 1, 4);
+
+                if (i == rooms.Length - 1)
+                {
+                    Instantiate(exitRoom, rooms[i].transform);
+                }
             }
         }
     }

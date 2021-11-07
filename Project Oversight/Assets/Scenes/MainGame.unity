@@ -679,7 +679,7 @@ MonoBehaviour:
   floorPrefab: {fileID: 8748807172745834293, guid: 4ca655a890d73ea4ba26086e0df520a4, type: 3}
   roofPrefab: {fileID: 1193666191095088242, guid: 0674ddb025273784bb3e7a2483a5c5c3, type: 3}
   hallwayFloorPrefab: {fileID: 1345553623245799652, guid: ba052dd2460707a4fbd98fa83614b30b, type: 3}
-  hallwayContainer: {fileID: 1801962698}
+  boundaryWallPrefab: {fileID: 3853646635326585272, guid: 61aaf0a3b511c064da7ef92224d0a4ff, type: 3}
   roomPrefabs:
   - {fileID: 6186385340142761274, guid: a9599a81bf9016a45b8dca8170bca562, type: 3}
   - {fileID: 469446142581672590, guid: b2b18cf19b6b08246a0acd22a6e2a3ba, type: 3}
@@ -696,7 +696,10 @@ MonoBehaviour:
   - {fileID: 6716972888685419628, guid: 8d3380b5e311b4d4a85ef49586873e64, type: 3}
   - {fileID: 8255283087441689321, guid: 1c52bab808bc0374890a6e4f1ee8f123, type: 3}
   - {fileID: 3517127192026149644, guid: 0d8c06eeedb328a498e59ba791cc6b9b, type: 3}
-  boundaryWallPrefab: {fileID: 3853646635326585272, guid: 61aaf0a3b511c064da7ef92224d0a4ff, type: 3}
+  internalRoomPrefabs: []
+  spawnRoom: {fileID: 0}
+  exitRoom: {fileID: 5319028297758490875, guid: af34a4239e3917e4cb8d3964a06e8470, type: 3}
+  hallwayContainer: {fileID: 1801962698}
   boundaryWallContainer: {fileID: 717075113}
   roomContainer: {fileID: 309044134}
   entityContainer: {fileID: 640650837}
